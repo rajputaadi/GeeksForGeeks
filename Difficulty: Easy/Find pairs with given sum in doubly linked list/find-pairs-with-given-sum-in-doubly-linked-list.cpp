@@ -30,41 +30,35 @@ public:
 };
 */
 
-class Solution {
+class Solution
+{
 public:
-    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target) {
-        vector<pair<int, int>> ans;
+    vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
+    {
+        vector<pair<int,int>> ans;
+        Node* left = head;
+        Node* right = head;
         
-        if (head == nullptr || head->next == nullptr) {
-            return ans; // If less than two nodes, return empty result
-        }
+        if(head==NULL || head->next==NULL) return ans;
         
-        Node *left = head;
-        Node *right = head;
-        
-        // Move right pointer to the last node
-        while (right->next != nullptr) {
+        while(right->next != NULL){
             right = right->next;
         }
         
-        while (left != nullptr && right != nullptr && left != right && left->prev != right) {
-            int sum = left->data + right->data;
-            
-            if (sum == target) {
-                ans.push_back({left->data, right->data});
+        while(left != NULL && right != NULL && left!=right&& left->prev != right){
+            if((left->data + right->data) == target ){
+                ans.push_back({left->data,right->data});
                 left = left->next;
-                right = right->prev;
-            } else if (sum < target) {
-                left = left->next;
-            } else {
                 right = right->prev;
             }
+            else if((left->data + right->data) < target ){
+                left = left->next;
+            }
+            else right = right->prev;
         }
-        
         return ans;
     }
 };
-
 
 //{ Driver Code Starts.
 
