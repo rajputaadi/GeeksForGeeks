@@ -49,30 +49,29 @@ struct Node
 class Solution {
   public:
     void deleteAllOccurOfX(struct Node** head_ref, int x) {
-        Node* temp = *head_ref;
+        Node* temp = * head_ref;
         while(temp!=NULL){
             if(temp->data == x){
-                
                 Node* nextnode = temp->next;
-                Node* prevnode = temp->prev;
-                if(*head_ref==temp){
-                    *head_ref = nextnode;
+                Node*prevnode = temp->prev;
+                
+                if(* head_ref  ==temp){
+                    * head_ref = nextnode;
                 }
-                if(nextnode!=NULL){
-                    nextnode->prev =prevnode;
+                if(temp->next !=NULL){
+                    nextnode->prev = prevnode;
                 }
-                if(prevnode!=NULL){
+                if(temp->prev !=NULL) {
                     prevnode->next = nextnode;
                 }
                 delete temp;
-                temp = temp->next;
+                temp= temp->next;
+                
             }
             else temp = temp->next;
         }
     }
 };
-
-
 
 //{ Driver Code Starts.
 
